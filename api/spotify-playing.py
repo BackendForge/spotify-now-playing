@@ -26,6 +26,13 @@ def getAuth():
     )
 
 
+def verifyToken(token):
+    if not token:
+        raise ValueError("Token is required")
+    else:
+        return token
+
+
 def refreshToken():
     data = {
         "grant_type": "refresh_token",
@@ -33,7 +40,7 @@ def refreshToken():
     }
     headers = {"Authorization": "Basic {}".format(getAuth())}
     response = requests.post(SPOTIFY_URL_REFRESH_TOKEN, data=data, headers=headers)
-    return response.json()["refresh_token"]
+    return verifyToken(response.json().get("access_token"))
 
 
 def recentlyPlayed():
