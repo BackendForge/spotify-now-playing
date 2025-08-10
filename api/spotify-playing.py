@@ -33,7 +33,7 @@ def refreshToken():
     }
     headers = {"Authorization": "Basic {}".format(getAuth())}
     response = requests.post(SPOTIFY_URL_REFRESH_TOKEN, data=data, headers=headers)
-    return response.json()["access_token"]
+    return response.json()["refresh_token"]
 
 
 def recentlyPlayed():
